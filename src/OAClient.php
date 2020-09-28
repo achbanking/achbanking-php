@@ -9,6 +9,11 @@ class OAClient extends OAAPIBase
     protected $config;
     protected $response;
 
+    public function __construct(OAClientConfig $config = null)
+    {
+        $this->config = $config ?: new OAClientConfig();
+    }
+
     public function connect($apiToken = '', $apiKey = '', $endpointUrl = '', $portNumber = '')
     {
         if ($apiToken) {
@@ -33,7 +38,7 @@ class OAClient extends OAAPIBase
 
         $response = $this->sendRequest($connectRequest);
 
-        $body = json_decode($response->body, false);
+        $body = json_decode($response->body);
 
         if ($response->success) {
             $this->sessionId = $response->session_id;
@@ -94,7 +99,7 @@ class OAClient extends OAAPIBase
             $this->response->postFields = $queryString;
         }
 
-        $body = json_decode($this->response->body, false);
+        $body = json_decode($this->response->body);
 
         if (isset($body->success)) {
             $this->response->success = $this->response->success && $body->success;
@@ -121,7 +126,7 @@ class OAClient extends OAAPIBase
         $response->httpCode = curl_getinfo($this->curlHandle, CURLINFO_HTTP_CODE);
         $response->lastUrl = curl_getinfo($this->curlHandle, CURLINFO_EFFECTIVE_URL);
 
-        if ($jsonResult = json_decode($response->body, false)) {
+        if ($jsonResult = json_decode($response->body)) {
             if ($jsonResult instanceof stdClass) {
                 $response->merge($jsonResult);
             } else {
