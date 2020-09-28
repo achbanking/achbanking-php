@@ -12,5 +12,6 @@
     "files": [
       "src/ACHBankingSdk.php"
     ]
-  }
+  },
+  "minimum-stability": "dev"
 }
