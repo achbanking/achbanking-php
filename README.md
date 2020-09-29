@@ -56,10 +56,29 @@ $result = $client->methodName([
     'param3' => 'value3',
 ]);
 
-// for example, get payment profile by ID
-$result = $client->getPaymentProfile([
-    'payment_profile_id' => 'payment-profile-id',
-]);
+// or
+$object = new \stdClass();
+$object->param1 = 'value1';
+$object->param2 = 'value2';
+$object->param3 = 'value3';
+
+$result = $client->methodName($object);
 ```
 
 Full list of available requests [HERE](https://achbanking.com/apiDoc/#endpointsDirectly).
+
+### Example
+
+```php
+<?php
+// get payment profile by ID
+$paymentProfile = $client->getPaymentProfile([
+    'payment_profile_id' => 'payment-profile-id',
+]);
+
+// modify the email address
+$paymentProfile->payment_profile_email_address = 'email@example.com';
+
+// and save it
+$result = $client->savePaymentProfile($paymentProfile);
+```
