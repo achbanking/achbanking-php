@@ -71,6 +71,7 @@ Full list of available requests [HERE](https://achbanking.com/apiDoc/#endpointsD
 
 ```php
 <?php
+
 // get payment profile by ID
 $paymentProfile = $client->getPaymentProfile([
     'payment_profile_id' => 'payment-profile-id',
