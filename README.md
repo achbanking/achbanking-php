@@ -15,12 +15,12 @@ composer require achbanking/sdk
 
 ## Quickstart
 
-### Connect
-
 | | Endpoint URL | Details |
 | --- | --- | --- |
 | Sandbox | `https://dev.achbanking.com/api/` | Has IP restrictions |
 | Production | `https://achbanking.com/api/` | |
+
+### Connect
 
 ```php
 // Via constructor
