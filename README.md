@@ -17,14 +17,19 @@ composer require achbanking/sdk
 
 ### Connect
 
+| | Endpoint URL | Details |
+| --- | --- | --- |
+| Sandbox | `https://dev.achbanking.com/api/` | Has IP restrictions |
+| Production | `https://achbanking.com/api/` | |
+
 ```php
 // Via constructor
 <?php
 
 $client = new \AchBanking\Sdk\Client(
-    'API_TOKEN',
-    'API_KEY',
-    'https://dev.achbanking.com/api/'
+    'API_TOKEN', // from the site
+    'API_KEY', // from the site
+    'ENDPOINT_URL'
 );
 ```
 
@@ -36,7 +41,7 @@ $client = new \AchBanking\Sdk\Client();
 $client->useCredentials(
     'API_TOKEN',
     'API_KEY',
-    'https://dev.achbanking.com/api/'
+    'ENDPOINT_URL'
 );
 ```
 
