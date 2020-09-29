@@ -45,7 +45,7 @@ class OAClient extends OAAPIBase
         } else {
             $this->sessionId = null;
 
-            throw new RuntimeException($body->error);
+            throw new RuntimeException($response->error);
         }
 
         return $response;
