@@ -38,8 +38,6 @@ class OAClient extends OAAPIBase
 
         $response = $this->sendRequest($connectRequest);
 
-        $body = json_decode($response->body);
-
         if ($response->success) {
             $this->sessionId = $response->session_id;
         } else {
