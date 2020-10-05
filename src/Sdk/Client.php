@@ -63,23 +63,33 @@ use OAClient;
  */
 class Client
 {
+    /** @var OAClient */
     protected $client;
+    /** @var bool */
     protected $connected = false;
+    /** @var string */
     protected $sessionId;
+    /** @var string */
     protected $error;
 
+    /** @var string */
     protected $token;
+    /** @var string */
     protected $key;
+    /** @var string */
     protected $endpoint;
+    /** @var int */
+    protected $timeout;
 
     public function __construct(
-        string $token = null,
-        string $key = null,
-        string $endpoint = null
+        ?string $token = null,
+        ?string $key = null,
+        ?string $endpoint = null,
+        ?int $timeout = null
     ) {
         $this->client = new OAClient();
 
-        $this->useCredentials($token, $key, $endpoint);
+        $this->useCredentials($token, $key, $endpoint, $timeout);
     }
 
     public function __destruct()
@@ -105,9 +115,10 @@ class Client
     }
 
     public function useCredentials(
-        string $token = null,
-        string $key = null,
-        string $endpoint = null
+        ?string $token = null,
+        ?string $key = null,
+        ?string $endpoint = null,
+        ?int $timeout = null
     ) {
         if (
             $this->connected
@@ -125,6 +136,7 @@ class Client
         $this->token = $token;
         $this->key = $key;
         $this->endpoint = $endpoint;
+        $this->timeout = $timeout;
 
         if (!$this->token || !$this->key) {
             $this->error = 'Credentials are required';
@@ -140,7 +152,9 @@ class Client
             $response = $this->client->connect(
                 $this->token,
                 $this->key,
-                $this->endpoint
+                $this->endpoint,
+                null,
+                $this->timeout
             );
 
             if ($response instanceof OAAPIResponse && $response->success) {
@@ -153,6 +167,37 @@ class Client
         } catch (Exception $e) {
             $this->error = $e->getMessage();
         }
+    }
+
+    public function withoutAuth(
+        ?string $endpoint = null,
+        ?int $timeout = null
+    ) {
+        if ($endpoint) {
+            $this->endpoint = $endpoint;
+        }
+
+        if ($timeout) {
+            $this->timeout = $timeout;
+        }
+
+        $this->error = null;
+
+        if (!$this->endpoint) {
+            $this->error = 'The endpoint is not set';
+            $this->connected = false;
+            return $this;
+        }
+
+        $this->client->withoutAuth(
+            $this->endpoint,
+            null,
+            $this->timeout
+        );
+
+        $this->connected = true;
+
+        return $this;
     }
 
     public function getSessionId()
