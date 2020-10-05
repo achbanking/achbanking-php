@@ -14,7 +14,7 @@ class OAClient extends OAAPIBase
         $this->config = $config ?: new OAClientConfig();
     }
 
-    public function connect($apiToken = '', $apiKey = '', $endpointUrl = '', $portNumber = '')
+    public function connect($apiToken = '', $apiKey = '', $endpointUrl = '', $portNumber = '', $timeout = '')
     {
         if ($apiToken) {
             $this->config->apiToken = $apiToken;
@@ -30,6 +30,10 @@ class OAClient extends OAAPIBase
 
         if ($portNumber) {
             $this->config->portNumber = $portNumber;
+        }
+
+        if ($timeout) {
+            $this->config->timeout = $timeout;
         }
 
         $connectRequest = new OAConnectRequest();
@@ -61,6 +65,23 @@ class OAClient extends OAAPIBase
         return $response;
     }
 
+    public function withoutAuth($endpointUrl = '', $portNumber = '', $timeout = '')
+    {
+        if ($endpointUrl) {
+            $this->config->endpointUrl = $endpointUrl;
+        }
+
+        if ($portNumber) {
+            $this->config->portNumber = $portNumber;
+        }
+
+        if ($timeout) {
+            $this->config->timeout = $timeout;
+        }
+
+        return $this;
+    }
+
     public function sendRequest(OAAPIRequest $request)
     {
         $params = $request->getParams();
@@ -78,7 +99,7 @@ class OAClient extends OAAPIBase
         $options = [
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_HEADER => 0,
-            CURLOPT_TIMEOUT => 50,
+            CURLOPT_TIMEOUT => $this->config->timeout,
             CURLOPT_URL => $connectUrl,
             CURLOPT_POST => count($params),
             CURLOPT_POSTFIELDS => $queryString,
