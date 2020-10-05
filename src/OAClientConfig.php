@@ -10,9 +10,10 @@ class OAClientConfig
     // (using another custom subclass to load them), and possibly even encrypted (using a
     // subclass implementation to decrypt on loading the values).
 
-    public $endpointUrl = ''; // Make sure the endpoint is the server your account is on
+    public $endpointUrl; // Make sure the endpoint is the server your account is on
     public $portNumber; // Due to CURL requirements, port number should not be included in the endpoint URL
     // CURL uses the default port for the scheme (http/https), so this an optional setting
     public $apiToken;   // Api Token
     public $apiKey;     // Api Key
+    public $timeout = 50; // For CURL
 }
