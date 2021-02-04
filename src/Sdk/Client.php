@@ -48,6 +48,7 @@ use OAClient;
  * @method array  getBlockedById(array|object $attributes = [])
  * @method object checkGiact(array|object $attributes = [])
  * @method array  getGiactLog(array|object $attributes = [])
+ * @method array  checkOfac(array|object $attributes = [])
  * @method array  getPaymentScheduleTransactionsLog(array|object $attributes = [])
  * @method object getDocument(array|object $attributes = [])
  * @method array  getDocuments(array|object $attributes = [])
