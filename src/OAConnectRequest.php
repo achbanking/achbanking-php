@@ -529,6 +529,16 @@ class OAGetGiactLog extends OAAPIRequest
 }
 
 /**
+ * Class OACheckOfac.
+ *
+ * @property string $company_name
+ */
+class OACheckOfac extends OAAPIRequest
+{
+    public $action = 'checkOfac';
+}
+
+/**
  * Class OAGetPaymentScheduleTransactionsLogRequest.
  *
  * @property string $payment_schedule_id
