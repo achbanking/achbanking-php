@@ -68,9 +68,9 @@ class Client
     protected $client;
     /** @var bool */
     protected $connected = false;
-    /** @var string */
+    /** @var ?string */
     protected $sessionId;
-    /** @var string */
+    /** @var ?string */
     protected $error;
 
     /** @var string */
@@ -96,6 +96,7 @@ class Client
     public function __destruct()
     {
         if ($this->connected) {
+            $this->reset();
             $this->client->disconnect();
         }
     }
@@ -129,6 +130,8 @@ class Client
         ) {
             return;
         }
+
+        $this->reset();
 
         if ($this->connected) {
             $this->client->disconnect();
@@ -174,6 +177,8 @@ class Client
         ?string $endpoint = null,
         ?int $timeout = null
     ) {
+        $this->reset();
+
         if ($endpoint) {
             $this->endpoint = $endpoint;
         }
@@ -182,11 +187,8 @@ class Client
             $this->timeout = $timeout;
         }
 
-        $this->error = null;
-
         if (!$this->endpoint) {
             $this->error = 'The endpoint is not set';
-            $this->connected = false;
             return $this;
         }
 
@@ -209,6 +211,13 @@ class Client
     public function isConnected()
     {
         return $this->connected;
+    }
+
+    protected function reset()
+    {
+        $this->connected = false;
+        $this->sessionId = null;
+        $this->error = null;
     }
 
     protected function sendRequest($request)
