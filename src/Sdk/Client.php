@@ -213,6 +213,11 @@ class Client
         return $this->connected;
     }
 
+    public function getError()
+    {
+        return $this->error;
+    }
+
     protected function reset()
     {
         $this->connected = false;
