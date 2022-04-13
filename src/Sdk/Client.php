@@ -26,6 +26,7 @@ use OAClient;
  * @method array  getPaymentSchedulesSuspends(array|object $attributes = [])
  * @method array  getPaymentSchedules(array|object $attributes = [])
  * @method array  getPaymentSchedulesSummary(array|object $attributes = [])
+ * @method array  findPaymentSchedules(array|object $attributes = [])
  * @method object getPaymentType(array|object $attributes = [])
  * @method array  getPaymentTypes(array|object $attributes = [])
  * @method object saveExternalAccount(array|object $attributes = [])
