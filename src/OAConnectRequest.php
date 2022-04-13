@@ -176,6 +176,27 @@ class OAGetPaymentSchedulesSummaryRequest extends OAAPIRequest
 }
 
 /**
+ * Class OAFindPaymentSchedules.
+ *
+ * @property string $payment_schedule_id
+ * @property string $payment_schedule_external_account_id
+ * @property string $payment_schedule_payment_type_id
+ * @property string $payment_schedule_amount
+ * @property string $payment_schedule_currency_code
+ * @property string $payment_schedule_next_date
+ * @property string $payment_schedule_frequency
+ * @property string $payment_schedule_end_date
+ * @property string $payment_schedule_description
+ * @property string $payment_schedule_contract_id
+ * @property string $payment_schedule_remaining_occurrences
+ * @property string $payment_schedule_status
+ */
+class OAFindPaymentSchedules extends OAAPIRequest
+{
+    public $action = 'findPaymentSchedules';
+}
+
+/**
  * Class OAGetPaymentTypeRequest
  * Get a single payment type by id.
  *
