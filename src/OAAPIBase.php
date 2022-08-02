@@ -83,7 +83,7 @@ class OAAPIBase implements IteratorAggregate
         $this->records = $records;
     }
 
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return count($this->records)
             ? new ArrayIterator($this->records)
