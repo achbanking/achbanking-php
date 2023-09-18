@@ -58,10 +58,6 @@ use OAClient;
  * @method object experianGetLog(array|object $attributes = [])
  * @method array  experianGetLogs(array|object $attributes = [])
  * @method object experianSearchBusinessOwnerProfile(array|object $attributes = [])
- * @method object tloGetLog(array|object $attributes = [])
- * @method array  tloGetLogs(array|object $attributes = [])
- * @method object tloSearchPersonal(array|object $attributes = [])
- * @method object tloSearchBusiness(array|object $attributes = [])
  */
 class Client
 {
